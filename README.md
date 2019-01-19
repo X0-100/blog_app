@@ -1,2 +1,2 @@
-# blog_app
+# Written in Python 
 Blog Application &amp; Tests
