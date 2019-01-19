@@ -1,64 +1,57 @@
 '''
-This class implements the app which is a client to both blog and post classes
+This file implements the app interface that will act
+as a client for blog and post
 '''
 from blog import Blog
-MENU_PROMPT = 'Enter "c" to create a Blog, "l" to list blogs, "r" to read blogs, "p" to create a post, "q" to quit'
-POST_TEMPLATE = 'Post title{}-Post content{}'
+MENU_PROMPT = 'Enter "p" to create a post, "c" to create a blog, "l" to print a blog, "r" to read a blog, "q" to quit'
+POST_TEMPLATE = 'Title of the post : {} content of the post : {}'
 blogs = dict()
-# ==============================================================================================================================
+
 def menu():
     selection = input(MENU_PROMPT)
-    while(selection!='q'):
-        if(selection == 'c'):
-            create_blog()
+    while(selection != 'q'):
+        if(selection == 'p'):
+            p_create_post()
             break
         else:
-            if(selection == 'l'):
-                print_blog()
+            if(selection == 'c'):
+                c_create_blog()
                 break
             else:
-                if(selection == 'r'):
-                    read_blog()
+                if(selection == 'l'):
+                    l_print_blog()
                     break
                 else:
-                    if(selection == 'p'):
-                        create_post()
+                    if(selection == 'r'):
+                        r_read_blog()
                         break
+
         break
-# ==============================================================================================================================
-'''
-SELECTION = 'c'
-'''
-def create_blog():
-    blog_title = input('Enter the blog title you want to create  : ')
-    blog_author = input('Enter the blog author : ')
-    blogs[blog_title] = Blog(blog_title,blog_author)
-# ==============================================================================================================================
-'''
-SELECTION = 'l'
-'''
-def print_blog():
-    for key, blog in blogs.items():
-        print('{} '.format(blog.__repr__()))
-# ==============================================================================================================================
-'''
-SELECTION = 'p'
-'''
-def create_post():
-    blog_title = input('Enter the blog title you want to write a post in   : ')
-    post_title = input('Enter the post title you want to create in a blog : ')
-    post_content = input('Write your Post : ')
+
+
+def p_create_post():
+    blog_title = input('Enter the Blog name you want to write a post for : ')
+    post_title = input('Enter the Post title : ')
+    post_content = input('Enter the Post Content : ')
     blogs[blog_title].create_post(post_title,post_content)
-# =============================================================================================================================
-'''
-SELECTION = 'r'
-'''
-def read_blog():
-    title = input('Enter the blog title you want to read  : ')
-    print_posts(blogs[title])
+
+def c_create_blog():
+    title = input('Enter  Blog Title  : ')
+    author = input('Enter Blog Author : ')
+    blogs[title] = Blog(title,author)
+
+def l_print_blog():
+    for key, blog in blogs.items():
+        print('-{}'.format(blog.__repr__()))
+
+def r_read_blog():
+    blog_title = input('Enter the blog title you want to read : ')
+    print_posts(blogs[blog_title])
 def print_posts(blog):
     for post in blog.posts:
         print_post(post)
 def print_post(post):
-    print(POST_TEMPLATE.format(post.title, post.content))
-# =============================================================================================================================
+    return(POST_TEMPLATE.format(post.title, post.content))
+
+
+

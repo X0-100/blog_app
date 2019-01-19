@@ -1,15 +1,14 @@
 '''
-Allows user to create post with post title and post content
+This file implements the post functionality for a blog application to be created
 '''
 
 class Post:
-    def __init__(self,title,content):
-        self.title = title
+    def __init__(self, title, content):
+        self.title =  title
         self.content = content
 
     def json(self):
-        #return({self.title : self.content})
-        return(
-            {'title' : self.title,
-            'content' : self.content}
-        )
+        return({
+            'title' : self.title,
+            'content' : self.content
+        })
